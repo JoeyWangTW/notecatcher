@@ -1,6 +1,13 @@
-(ns notecatcher.frontend.app)
+(ns notecatcher.frontend.app
+  (:require
+    [rum.core :as rum]))
 
 
-(defn init
-  []
-  (println "Hello World"))
+(rum/defc Test < rum/static
+          []
+          [:div "Hello World!"])
+
+
+(rum/mount
+  (Test)
+  (.-body js/document))
