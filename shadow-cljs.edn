@@ -5,11 +5,11 @@
   "src/test"]
 
  :dependencies
- []
+ [[rum "0.12.8"]]
 
  :dev-http {8080 "public"}
 
  :builds
  {:frontend
   {:target :browser
-   :modules {:main {:init-fn notecatcher.frontend.app/init}}}}}
+   :modules {:main {:entries [notecatcher.frontend.app]}}}}}
