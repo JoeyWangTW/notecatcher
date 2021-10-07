@@ -10,4 +10,8 @@
  :builds
  {:frontend
   {:target :browser
-   :modules {:main {:entries [notecatcher.frontend.app]}}}}}
+   :modules {:main {:entries [notecatcher.frontend.app]}}}
+  :functions
+  {:target :node-library
+   :output-to "functions/index.js"
+   :exports-var notecatcher.server.functions/exports}}}
