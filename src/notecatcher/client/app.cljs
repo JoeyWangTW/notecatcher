@@ -1,4 +1,4 @@
-(ns notecatcher.frontend.app
+(ns notecatcher.client.app
   (:require
     [rum.core :as rum]))
 

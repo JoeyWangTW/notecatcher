@@ -3,9 +3,9 @@
     "public": "public",
     "rewrites": [
       {
-	"source": "**",
-	"function": "handleRequest"
+        "source": "/api/hello",
+        "function": "handleRequest"
       }
     ]
-  }
+  },
 }

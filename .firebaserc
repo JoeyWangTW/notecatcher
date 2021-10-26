@@ -1,6 +1,7 @@
 {
   "projects": {
-    "dev": "notecatcher-dev"
+    "dev": "notecatcher-dev",
+    "default": "notecatcher-dev"
   },
   "targets": {}
 }

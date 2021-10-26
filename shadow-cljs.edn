@@ -1,6 +1,6 @@
 ;; shadow-cljs configuration
 {:source-paths
- ["src/"]
+ ["src"]
 
  :dependencies
  [[rum "0.12.8"]]
@@ -8,9 +8,9 @@
  :dev-http {8080 "public"}
 
  :builds
- {:frontend
+ {:client
   {:target :browser
-   :modules {:main {:entries [notecatcher.frontend.app]}}}
+   :modules {:main {:entries [notecatcher.client.app]}}}
   :functions
   {:target :node-library
    :output-to "functions/index.js"
