@@ -5,7 +5,11 @@
       {
         "source": "/api/hello",
         "function": "handleRequest"
+      },
+      {
+	"source": "/**",
+	"function": "index"
       }
     ]
-  },
+  }
 }

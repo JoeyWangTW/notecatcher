@@ -1,12 +1,16 @@
 (ns notecatcher.server.functions
   (:require
-    ["firebase-functions" :as functions]))
+    ["firebase-functions" :as functions]
+    [notecatcher.server.index-page :as index-page]))
 
 
-(defn handle-request
-  [^js req,  ^js res]
-  (.send res "Hello World! I'm notecatcher."))
+(def handle-request-fn
+  (.onRequest (.-https functions)
+              (fn handle-request
+                [^js req,  ^js res]
+                (.send res "Hello World! I'm notecatcher."))))
 
 
 (def exports
-  #js{:handleRequest (.onRequest functions/https handle-request)})
+  #js {:handleRequest handle-request-fn
+       :index index-page/handler})
