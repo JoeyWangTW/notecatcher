@@ -5,13 +5,30 @@
  :dependencies
  [[rum "0.12.8"]]
 
- :dev-http {8080 "public"}
+ ;; TODO: couldn't get serverside rendering to work properly so use dev-http for now
+ :dev-http {8000 "resources/public"}
 
  :builds
  {:client
-  {:target :browser
-   :modules {:main {:entries [notecatcher.client.app]}}}
+  {:target     :browser
+   :modules    {:client {:entries [notecatcher.client.app]}}
+   :asset-path "/js/compiled"
+   :output-dir "resources/public/js/compiled"
+   :js-options {:js-package-dirs ["node_modules",
+                                  "node_modules/firebase/node_modules"]}
+   :devtools {:watch-dir "resources/public"}
+   :compiler-options {:infer-externs :auto
+                      :source-map true
+                      :source-map-timestamp true
+                      :reader-features #{:browser}}}
+
   :functions
   {:target :node-library
    :output-to "functions/index.js"
-   :exports-var notecatcher.server.functions/exports}}}
+   :exports-var notecatcher.server.functions/exports
+   :output-dir "functions/compiled"
+   :compiler-options {:optimizations :simple
+                      :static-fns true
+                      :source-map "functions/index.js.map"
+                      :reader-features #{:node}
+                      :fn-invoke-direct true}}}}
