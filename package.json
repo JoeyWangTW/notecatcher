@@ -1,8 +1,1 @@
-{
-  "name": "notecatcher",
-  "version": "0.0.1",
-  "private": true,
-  "devDependencies": {
-    "shadow-cljs": "2.15.10"
-  }
-}
+functions/package.json

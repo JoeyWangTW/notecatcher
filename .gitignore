@@ -4,6 +4,7 @@ public/js
 /target
 /checkouts
 /src/gen
+/functions/index.js
 
 pom.xml
 pom.xml.asc
