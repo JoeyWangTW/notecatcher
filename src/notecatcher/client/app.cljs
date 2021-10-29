@@ -1,5 +1,6 @@
 (ns notecatcher.client.app
   (:require
+    [goog.dom :as gdom]
     [rum.core :as rum]))
 
 
@@ -8,6 +9,11 @@
           [:div "Hello World!"])
 
 
-(rum/mount
-  (Test)
-  (.-body js/document))
+(defn main
+  []
+  (rum/mount
+    (Test)
+    (gdom/getElement "main-app")))
+
+
+(main)
