@@ -18,6 +18,7 @@
                                   "node_modules/firebase/node_modules"]}
    :devtools {:watch-dir "resources/public"}
    :compiler-options {:infer-externs :auto
+                      :optimizations :simple
                       :source-map true
                       :source-map-timestamp true
                       :reader-features #{:browser}}}

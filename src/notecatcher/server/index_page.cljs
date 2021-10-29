@@ -7,7 +7,7 @@
 (rum/defc IndexPage
           []
           [:html
-           [:head]
+           [:head [:title "Notecatcher"]]
            [:body
             [:div#main-app]
             [:script {:src (str "/js/compiled/client.js")}]]])
