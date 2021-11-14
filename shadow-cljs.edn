@@ -5,7 +5,8 @@
  :dependencies
  [[rum "0.12.8"]
   [clj-commons/citrus "3.3.0"]
-  [cljs-bean "1.7.0"]]
+  [cljs-bean "1.7.0"]
+  [funcool/promesa "6.0.2"]]
 
  ;; TODO: couldn't get serverside rendering to work properly so use dev-http for now
  :dev-http {8000 "resources/public"}

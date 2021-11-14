@@ -5,6 +5,7 @@
     [notecatcher.client.hooks :as hooks]
     [notecatcher.firebase :as firebase]
     [notecatcher.reconciler :as reconciler]
+    [promesa.core :as promesa]
     [rum.core :as rum]))
 
 
@@ -20,9 +21,37 @@
               "Get Note!"]]))
 
 
+(rum/defc Note < rum/static
+          [data]
+          [:div (:note data)])
+
+
+(rum/defc Notes < rum/static
+          [date uid]
+          (let [[loading? set-loading?!] (rum/use-state true)
+                [notes set-notes!] (rum/use-state nil?)]
+            (rum/use-effect!
+              (fn query-note
+                []
+                (-> (firebase/query-notes date uid)
+                    (promesa/then #(do
+                                     (set-notes! %)
+                                     (set-loading?! false))))
+                nil)
+              [date])
+            [:div
+             (if loading?
+               [:p "loading..."]
+               [:div
+                [:h3 (str (if (> (count notes) 0) date "Can't find ") " Notes")]
+                (->> (map #(Note %) notes)
+                     (into [:div]))])]))
+
+
 (rum/defc App  < rum/static
           [r]
-          (let [user (first (hooks/use-sub r [:app :user]))]
+          (let [user (first (hooks/use-sub r [:app :user]))
+                date (hooks/use-sub r [:app :date])]
             [:div
              [:h1 "Notecatcher"]
              (when user
@@ -39,7 +68,9 @@
               {:on-click #(citrus/dispatch! r :app :test "hi!")}
               "test dispatch"]
              (when user
-               (GetNote r))]))
+               (GetNote r))
+             (when (and user date)
+               (Notes (first date) (:uid user)))]))
 
 
 (defn main

@@ -2,9 +2,28 @@
   (:require
     ["firebase/app" :as firebase]
     ["firebase/auth" :as auth]
+    ["firebase/firestore" :as firestore]
     [citrus.core :as citrus]
     [notecatcher.config :as config]
-    [notecatcher.reconciler :as reconciler]))
+    [notecatcher.reconciler :as reconciler]
+    [promesa.core :as promesa]))
+
+
+(defn doc-handler
+  [doc]
+  (js->clj (.data doc) :keywordize-keys true))
+
+
+(defn query-notes
+  [date uid]
+  (let [db (firestore/getFirestore)
+        collection (firestore/collection. db (str "user/" uid "/notes"))
+        query (firestore/query. collection (firestore/where "date" "==" (str date)))]
+    (-> (firestore/getDocs query)
+        (promesa/then #(let [docs (map (fn [doc]
+                                         (doc-handler doc))
+                                       (.-docs %1))]
+                         docs)))))
 
 
 (defn sign-in-with-google
