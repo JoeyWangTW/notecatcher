@@ -18,6 +18,11 @@
   {:state (merge state {:test arg})})
 
 
+(defmethod control :get-date [_ arg state]
+  (js/console.warn (str ":app/get-date: " arg))
+  {:state (merge state {:date arg})})
+
+
 (defmethod control :login [_ user state]
   (js/console.warn (str ":app/login: " user))
   {:state (merge state {:user user})})

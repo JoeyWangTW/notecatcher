@@ -8,7 +8,19 @@
     [rum.core :as rum]))
 
 
-(rum/defc Test  < rum/static
+(rum/defc GetNote < rum/static
+          [r]
+          (let [[date set-date!] (rum/use-state "")]
+            [:div
+             [:p "Enter date (format: mmddyyyy"]
+             [:input {:value date
+                      :on-change #(set-date! (.. % -target -value))}]
+             [:button
+              {:on-click #(citrus/dispatch! r :app :get-date date)}
+              "Get Note!"]]))
+
+
+(rum/defc App  < rum/static
           [r]
           (let [user (first (hooks/use-sub r [:app :user]))]
             [:div
@@ -25,7 +37,9 @@
                 "Logout"])
              [:button
               {:on-click #(citrus/dispatch! r :app :test "hi!")}
-              "test dispatch"]]))
+              "test dispatch"]
+             (when user
+               (GetNote r))]))
 
 
 (defn main
@@ -33,7 +47,7 @@
   (reconciler/initilize-reconciler)
   (firebase/init)
   (rum/mount
-    (Test @reconciler/r)
+    (App @reconciler/r)
     (gdom/getElement "main-app")))
 
 
