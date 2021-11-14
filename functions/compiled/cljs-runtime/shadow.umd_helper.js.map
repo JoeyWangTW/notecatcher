@@ -1,1 +1,0 @@
-{"version":3,"sources":["shadow/umd_helper.cljs"],"mappings":"","names":[],"sourcesContent":["[(ns shadow.umd-helper (:require [notecatcher.server.functions])) (clojure.core/defn get-exports [] notecatcher.server.functions/exports)]"]}
