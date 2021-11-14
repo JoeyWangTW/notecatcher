@@ -2,6 +2,8 @@ node_modules/
 resources/public/js
 resources/public/js/compiled
 
+/src/notecatcher/config.cljs
+
 /target
 /checkouts
 /src/gen
